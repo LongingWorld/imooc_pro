@@ -1,20 +1,20 @@
 package fetcher
 
 import (
-	"net/http"
-	"fmt"
-	"golang.org/x/text/transform"
-	"io/ioutil"
-	"io"
-	"golang.org/x/text/encoding"
 	"bufio"
-	"golang.org/x/net/html/charset"
-	"golang.org/x/text/encoding/unicode"
+	"fmt"
+	"io/ioutil"
 	"log"
+	"net/http"
+
+	"golang.org/x/net/html/charset"
+	"golang.org/x/text/encoding"
+	"golang.org/x/text/encoding/unicode"
+	"golang.org/x/text/transform"
 )
 
-func determineEncoding(r io.Reader) encoding.Encoding  {
-	bytes, e := bufio.NewReader(r).Peek(1024)
+func determineEncoding(r *bufio.Reader) encoding.Encoding  {
+	bytes, e := r.Peek(1024)
 	if e != nil {
 		log.Printf("Fetcher error:%v",e)
 		return unicode.UTF8  //return default encoding.Encoding
@@ -36,12 +36,13 @@ func FetcherURL(url string) ([]byte ,error) {
 		return nil,fmt.Errorf("wrong status code:%d",resp.StatusCode)
 	}
 
+	bodyReader := bufio.NewReader(resp.Body)
 	//get encoding of the html
-	encode := determineEncoding(resp.Body)
+	encode := determineEncoding(bodyReader)
 
 	//手工转码
 	//utf8reader := transform.NewReader(resp.Body, simplifiedchinese.GBK.NewDecoder())
-	utf8reader := transform.NewReader(resp.Body, encode.NewDecoder())
+	utf8reader := transform.NewReader(bodyReader, encode.NewDecoder())
 
 	return ioutil.ReadAll(utf8reader)
 }
