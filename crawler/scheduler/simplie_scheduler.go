@@ -12,7 +12,7 @@ func (s *SimpleScheduler) ConfigureMasterWorkChan(c chan engine.Request) {
 
 func (s *SimpleScheduler) Summit(r engine.Request) {
 	//send request down to worker chan
-	s.workChan <- r
+	go func() {s.workChan <- r}()
 }
 
 
