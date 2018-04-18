@@ -19,20 +19,22 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 	e.Scheduler.ConfigureMasterWorkChan(in)
 
 	for i:=0;i<e.WorkerCount;i++  {
-		createWorkder(in,out)
+		createWorkder(in,out)   //创建处理请求的goroutine：接收Request(请求) 输出ParserResult(解析结果)
 	}
 
 	for _,r := range seeds  {
-		e.Scheduler.Summit(r)
+		e.Scheduler.Summit(r)   //将Seeds Request分发给channel in(接收者)
 	}
 
+	countItems :=0
 	for{
-		result := <-out
+		result := <-out    //等待接收输出
 		for _,item :=range result.Items{
-			log.Printf("Got item:%v",item)
+			log.Printf("Got item:#%d %v",countItems,item)
+			countItems++
 		}
 		for _,request := range result.Requests{
-			e.Scheduler.Summit(request)
+			e.Scheduler.Summit(request)  //将第二层请求分发给channel in(接收者)
 		}
 	}
 }
@@ -40,12 +42,12 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 func createWorkder(in chan Request,out chan ParserResult)  {  //创建goroutine
 	go func() {
 		for   {
-			request := <- in
+			request := <- in   //等待接收
 			result, err := Worker(request)
 			if err !=nil {
 				continue
 			}
-			out <- result
+			out <- result   //等待输出
 		}
 	}()
 }
