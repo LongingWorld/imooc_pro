@@ -17,12 +17,12 @@ type Scheduler interface {
 //负责通过建立goroutine将Engine分发的Request输送给worker进行工作
 func (e *ConcurrentEngine)Run(seeds ...Request)  {
 
-	in := make(chan Request)
+	//in := make(chan Request)
 	out := make(chan ParserResult)
-	e.Scheduler.ConfigureMasterWorkChan(in)
+	e.Scheduler.Run()
 
 	for i:=0;i<e.WorkerCount;i++  {
-		createWorker(in,out)   //创建处理请求的goroutine：接收Request(请求) 输出ParserResult(解析结果)
+		createWorker(out,e.Scheduler)   //创建处理请求的goroutine：接收Request(请求) 输出ParserResult(解析结果)
 	}
 
 	for _,r := range seeds  {
@@ -42,9 +42,11 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 	}
 }
 
-func createWorker(in chan Request,out chan ParserResult)  {  //创建goroutine
+func createWorker(out chan ParserResult,s Scheduler)  {  //创建goroutine
+	in := make(chan Request)
 	go func() {
 		for   {
+			s.WorkReady(in)
 			request := <- in   //等待接收
 			result, err := Worker(request)
 			if err !=nil {
