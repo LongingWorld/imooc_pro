@@ -7,6 +7,10 @@ type QueueScheduler struct {
 	workChan chan  chan engine.Request
 }
 
+func (s *QueueScheduler) WorkerChan() chan engine.Request {
+	return make(chan engine.Request)
+}
+
 func (s *QueueScheduler) Run() {
 	s.workChan = make(chan chan engine.Request)
 	s.requestChan = make(chan engine.Request)
@@ -41,7 +45,6 @@ func (s *QueueScheduler) Summit(r engine.Request) {
 	s.requestChan <- r
 }
 
-func (*QueueScheduler) ConfigureMasterWorkChan(chan engine.Request) {
-}
+
 
 

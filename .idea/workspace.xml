@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="facbbbea-4fdd-4a23-aedc-dd312b95ba24" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/crawler/engine/concurrent.go" beforeDir="false" afterPath="$PROJECT_DIR$/crawler/engine/concurrent.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/crawler/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/crawler/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/crawler/scheduler/queue_scheduler.go" beforeDir="false" afterPath="$PROJECT_DIR$/crawler/scheduler/queue_scheduler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crawler/scheduler/simplie_scheduler.go" beforeDir="false" afterPath="$PROJECT_DIR$/crawler/scheduler/simplie_scheduler.go" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/crawler/main.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
-              <caret line="12" column="43" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+              <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -44,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="concurrent.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="concurrent.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/crawler/engine/concurrent.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+            <state relative-caret-position="298">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -56,17 +56,17 @@
       <file leaf-file-name="queue_scheduler.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/crawler/scheduler/queue_scheduler.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-286">
-              <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
+            <state relative-caret-position="770">
+              <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simplie_scheduler.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="simplie_scheduler.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/crawler/scheduler/simplie_scheduler.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="13" column="38" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
+            <state relative-caret-position="188">
+              <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -91,6 +91,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>ConfigureMasterWorkChan</find>
+    </findStrings>
+  </component>
   <component name="GOROOT" path="D:\Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -112,12 +117,12 @@
         <option value="$PROJECT_DIR$/crawler/engine/simple.go" />
         <option value="$PROJECT_DIR$/crawler/scheduler/simplie.go" />
         <option value="$PROJECT_DIR$/crawler/engine/simple_engine.go" />
-        <option value="$PROJECT_DIR$/crawler/scheduler/simplie_scheduler.go" />
         <option value="$PROJECT_DIR$/crawler/fetcher/fetcher.go" />
         <option value="$PROJECT_DIR$/crawler/engine/queue_engine.go" />
         <option value="$PROJECT_DIR$/crawler/scheduler/queue_scheduler.go" />
-        <option value="$PROJECT_DIR$/crawler/main.go" />
         <option value="$PROJECT_DIR$/crawler/engine/concurrent.go" />
+        <option value="$PROJECT_DIR$/crawler/main.go" />
+        <option value="$PROJECT_DIR$/crawler/scheduler/simplie_scheduler.go" />
       </list>
     </option>
   </component>
@@ -138,7 +143,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -185,7 +190,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -200,7 +205,7 @@
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../learngo" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
@@ -333,6 +338,7 @@
       <workItem from="1524215668587" duration="5520000" />
       <workItem from="1524273277985" duration="1576000" />
       <workItem from="1524319483450" duration="3054000" />
+      <workItem from="1524363977995" duration="3906000" />
     </task>
     <servers />
   </component>
@@ -369,7 +375,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102116000" />
+    <option name="totallyTimeSpent" value="106022000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -382,6 +388,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32883817" />
@@ -390,10 +397,10 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32883817" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49946696" weight="0.32883817" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09488273" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09594883" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -610,6 +617,15 @@
     </entry>
     <entry file="file://C:/Go/src/net/http/client.go" />
     <entry file="file://$PROJECT_DIR$/crawler/engine/queue_engine.go" />
+    <entry file="file://C:/Go/src/net/http/request.go" />
+    <entry file="file://C:/Go/src/net/http/method.go" />
+    <entry file="file://$PROJECT_DIR$/crawler/fetcher/fetcher.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1980">
+          <caret line="103" selection-start-line="103" selection-end-line="103" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/crawler/engine/types.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -617,12 +633,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Go/src/net/http/request.go" />
-    <entry file="file://C:/Go/src/net/http/method.go" />
-    <entry file="file://$PROJECT_DIR$/crawler/fetcher/fetcher.go">
+    <entry file="file://$PROJECT_DIR$/crawler/scheduler/queue_scheduler.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
+        <state relative-caret-position="770">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawler/engine/concurrent.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
@@ -636,28 +657,14 @@
     <entry file="file://$PROJECT_DIR$/crawler/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
-          <caret line="12" column="43" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/crawler/scheduler/simplie_scheduler.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="38" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crawler/scheduler/queue_scheduler.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-286">
-          <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crawler/engine/concurrent.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+        <state relative-caret-position="188">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
         </state>
       </provider>
     </entry>

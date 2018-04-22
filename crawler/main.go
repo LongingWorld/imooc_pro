@@ -10,7 +10,7 @@ const requesturl = "http://www.zhenai.com/zhenghun"
 
 func main() {
 	e := engine.ConcurrentEngine{
-		Scheduler:&scheduler.QueueScheduler{},
+		Scheduler:&scheduler.SimpleScheduler{},
 		WorkerCount:100,
 	}
 	e.Run(engine.Request{

@@ -8,10 +8,14 @@ type ConcurrentEngine struct {
 }
 
 type Scheduler interface {
+	ReadyNotifier
 	Summit(Request)
+	WorkerChan() chan Request  //每一个worker对应一个channel
 	Run()
+}
+
+type ReadyNotifier interface {
 	WorkReady(chan Request)
-	ConfigureMasterWorkChan(chan Request)
 }
 
 //负责通过建立goroutine将Engine分发的Request输送给worker进行工作
@@ -22,7 +26,7 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 	e.Scheduler.Run()
 
 	for i:=0;i<e.WorkerCount;i++  {
-		createWorker(out,e.Scheduler)   //创建处理请求的goroutine：接收Request(请求) 输出ParserResult(解析结果)
+		createWorker(e.Scheduler.WorkerChan(),out,e.Scheduler)   //创建处理请求的goroutine：接收Request(请求) 输出ParserResult(解析结果)
 	}
 
 	for _,r := range seeds  {
@@ -42,11 +46,10 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 	}
 }
 
-func createWorker(out chan ParserResult,s Scheduler)  {  //创建goroutine
-	in := make(chan Request)
+func createWorker(in chan Request,out chan ParserResult,ready ReadyNotifier)  {  //创建goroutine
 	go func() {
 		for   {
-			s.WorkReady(in)
+			ready.WorkReady(in)
 			request := <- in   //等待接收
 			result, err := Worker(request)
 			if err !=nil {
