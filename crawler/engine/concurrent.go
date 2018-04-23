@@ -1,10 +1,14 @@
 package engine
 
-import "log"
+import (
+	"log"
+
+)
 
 type ConcurrentEngine struct {
 	Scheduler Scheduler
 	WorkerCount int
+	ItemChan chan interface{}
 }
 
 type Scheduler interface {
@@ -30,17 +34,32 @@ func (e *ConcurrentEngine)Run(seeds ...Request)  {
 	}
 
 	for _,r := range seeds  {
+		if isUrlDuplicate(r.URL) {
+			log.Printf("Duplicate request: %s",r.URL)
+			continue
+		}
 		e.Scheduler.Summit(r)   //将Seeds Request分发给channel in(接收者)
 	}
 
-	countItems :=0
+	//countItems :=0
+	//profileCount := 0
 	for{
 		result := <-out    //等待接收输出
+
 		for _,item :=range result.Items{
-			log.Printf("Got item:#%d %v",countItems,item)
-			countItems++
+			go func() {
+				e.ItemChan <- item
+			}()
+			//if _,ok := item.(model.Profile);ok {
+			//	log.Printf("Got item:#%d %v",profileCount,item)
+			//	profileCount++
+			//}
 		}
 		for _,request := range result.Requests{
+			if isUrlDuplicate(request.URL) {
+				log.Printf("Duplicate request: %s",request.URL)
+				continue
+			}
 			e.Scheduler.Summit(request)  //将第二层请求分发给channel in(接收者)
 		}
 	}
@@ -58,4 +77,14 @@ func createWorker(in chan Request,out chan ParserResult,ready ReadyNotifier)  { 
 			out <- result   //等待输出
 		}
 	}()
+}
+
+var urlStore = make(map[string]bool)
+
+func isUrlDuplicate(url string) bool  {
+	if urlStore[url] {
+		return true
+	}
+	urlStore[url] = true
+	return false
 }
