@@ -21,7 +21,7 @@ var HokouRegexp = regexp.MustCompile(`<td><span class="label">籍贯：</span>([
 var XinzuoReg = regexp.MustCompile(`<td><span class="label">星座：</span><span field="">([^<]+)</span></td>`)
 var HouseRegexp = regexp.MustCompile(`<td><span class="label">住房条件：</span><span field="">([^<]+)</span></td>`)
 var CarRegexp = regexp.MustCompile(`<td><span class="label">是否购车：</span><span field="">([^<]+)</span></td>`)
-
+var GuessRegexp = regexp.MustCompile(`<a class="exp-user-name"[^>]*href="(http://album.zhenai.com/u/[\d]+)">([^<]+)</a>`)
 
 func ParserProfile(contents []byte,name string) engine.ParserResult  {
 	profile := model.Profile{}
@@ -41,10 +41,22 @@ func ParserProfile(contents []byte,name string) engine.ParserResult  {
 
 	//result := engine.ParserResult{}
 	//result.Items = append(result.Items,profile)
-
-	return engine.ParserResult{
+	result := engine.ParserResult{
 		Items:[]interface{}{profile},
 	}
+
+	matchs := GuessRegexp.FindAllSubmatch(contents, -1)
+	for _,m :=range matchs  {
+		name := string(m[2])
+		result.Requests = append(result.Requests,engine.Request{
+			URL:string(m[1]),
+			ParserFunc: func(bytes []byte) engine.ParserResult {
+				return ParserProfile(bytes,name)
+			},
+		})
+	}
+
+	return result
 }
 
 func extractString(contents []byte,reg *regexp.Regexp) string  {
