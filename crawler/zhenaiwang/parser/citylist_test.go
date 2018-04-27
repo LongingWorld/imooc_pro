@@ -24,19 +24,19 @@ func TestParserCityList(t *testing.T) {
 		"http://www.zhenai.com/zhenghun/akesu",
 		"http://www.zhenai.com/zhenghun/alashanmeng",
 	}
-	expectedItems := []string{
+	/*expectedItems := []string{
 		"City 阿坝","City 阿克苏","City 阿拉善盟",
 		//"","","",
-	}
+	}*/
 
 	for i,urls := range expectedURL{
 		if urls != result.Requests[i].URL {
 			t.Errorf("expected URL is %s ;but got %s",urls,result.Requests[i].URL)
 		}
 	}
-	for i,item := range expectedItems{
+	/*for i,item := range expectedItems{
 		if item != result.Items[i].(string) {  //.(string)将item类型转换为string
 			 t.Errorf("expected item is %s;but got %s",item,result.Items[i].(string))
 		}
-	}
+	}*/
 }

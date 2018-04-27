@@ -11,17 +11,18 @@ var(
 	CityUrlRequest = regexp.MustCompile(`href="(http://www.zhenai.com/zhenghun/[^"]+)`)
 )
 
-func ParserCity(contents []byte) engine.ParserResult  {
+func ParseCity(contents []byte) engine.ParserResult  {
 	//reg := regexp.MustCompile(CityRequest)
 	matchs := CityRequest.FindAllSubmatch(contents,-1)
 
 	result := engine.ParserResult{}
 	for _,m :=range matchs  {
 		name := string(m[2])
+		url := string(m[1])
 		result.Requests = append(result.Requests,
 			engine.Request{URL: string(m[1]),
 				ParserFunc:func(bytes []byte) engine.ParserResult {  //匿名函数  Closure闭包
-					return ParserProfile(bytes,name)},
+					return ParseProfile(bytes,url,name)},
 			})
 		//result.Items = append(result.Items, "User" + string(m[2]))
 	}
@@ -32,7 +33,7 @@ func ParserCity(contents []byte) engine.ParserResult  {
 		//result.Items = append(result.Items, "City " + string(m[2]))
 		result.Requests = append(result.Requests,
 			engine.Request{URL: string(m[1]),
-				ParserFunc:ParserCity,
+				ParserFunc:ParseCity,
 			})
 	}
 	return result

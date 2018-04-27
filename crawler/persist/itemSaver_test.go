@@ -5,28 +5,34 @@ import (
 	"encoding/json"
 	"testing"
 
+	"GitHub/imooc_pro/crawler/engine"
 	"GitHub/imooc_pro/crawler/model"
 
 	"gopkg.in/olivere/elastic.v5"
 )
 
 func TestSave(t *testing.T) {
-	expectedProfile := model.Profile{
-		Name:"妈妈催我找对象",
-		Gender:"女",
-		Age:20,
-		Height:165,
-		Weight:0,
-		Income:"3001-5000元",
-		Marriage:"未婚",
-		Education:"中专",
-		Occupation:"四川成都",
-		Hokou:"--",
-		Xinzuo:"牡羊座",
-		House:"--",
-		Car:"未购车",
+	expectedProfile :=engine.Item{
+		URL:"http://album.zhenai.com/u/110409917",
+		Type:"zhenai",
+		Id:"110409917",
+		Payload: model.Profile{
+			Name:"妈妈催我找对象",
+			Gender:"女",
+			Age:20,
+			Height:165,
+			Weight:0,
+			Income:"3001-5000元",
+			Marriage:"未婚",
+			Education:"中专",
+			Occupation:"四川成都",
+			Hokou:"--",
+			Xinzuo:"牡羊座",
+			House:"--",
+			Car:"未购车",
+		},
 	}
-	id,err := save(expectedProfile)
+	err := save(expectedProfile)
 	if err != nil {
 		panic(err)
 	}
@@ -41,19 +47,27 @@ func TestSave(t *testing.T) {
 	}
 	result, err := cli.Get().
 		Index("dating_profile").
-		Type("zhenai").
-		Id(id).
+		Type(expectedProfile.Type).
+		Id(expectedProfile.Id).
 		Do(context.Background())
 	if err != nil {
 		panic(err)
 	}
 
 	t.Logf("%s",result.Source)
-	var actual model.Profile
+	var actual engine.Item
 	e := json.Unmarshal(*result.Source, &actual)
 	if e != nil {
 		panic(e)
 	}
+
+	actualProfile,err := model.FromJsonObj(actual.Payload)
+	if err != nil {
+		panic(err)
+	}
+
+	actual.Payload = actualProfile
+
 	if expectedProfile != actual {
 		t.Errorf("Got %v ; expected %v",actual,expectedProfile)
 	}
